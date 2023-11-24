@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private SensorEventListener accelerometerEventListener;
     private TextView tvValues;
     private long x, y, z;
+    private String direction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,19 @@ public class MainActivity extends AppCompatActivity {
                 x = Math.round(Math.toDegrees(sensorEvent.values[0])); //toDegrees convierte un ángulo de radianes a grados
                 y = Math.round(Math.toDegrees(sensorEvent.values[1])); //math.round Redondea los numeros
                 z = Math.round(Math.toDegrees(sensorEvent.values[2])); //.values indica la posición del ángulo.
-                tvValues.setText(x+"::"+y+"::"+z);
+                //tvValues.setText(x+"::"+y+"::"+z);
+                if (x < -200)
+                    direction = "↑";
+                else if (x > 280)
+                    direction = "↓";
+                else if (y < -200)
+                    direction = "←";
+                else if (y > 250)
+                    direction = "→";
+                else
+                    direction = "■";
+
+                tvValues.setText(direction);
             }
 
             @Override
